@@ -5,8 +5,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,11 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import dao.FeedbackDao;
 import dto.MessageDto;
 import dto.ResumeDto;
+import model.Feedback;
 
 @RestController // Used when we wants to return json object
 public class MyController {
+	
+	@Autowired
+	 FeedbackDao feedbackDao;
 	
 	@GetMapping("/hi")
 	List<String> returnList() {
@@ -108,8 +115,37 @@ public class MyController {
 		System.out.println(msgDto.getName());
 		System.out.println(msgDto.getEmailId());
 		System.out.println(msgDto.getMessage());
+		feedbackDao.saveFeedback(msgDto);
+		
 		return "FeedBack submitted";
 	}
+	
+	@GetMapping("/getAllFeedbacks")
+	List<MessageDto> getAllFeedbacks(){
+		List<Feedback> feedBackList = new ArrayList<>();
+		List<MessageDto> feedBackDtoList = new ArrayList<>();
+		feedBackList = feedbackDao.getAllFeedbacks();
+		for(Feedback fb: feedBackList) {
+			MessageDto msgDto = new MessageDto();
+			msgDto.setName(fb.getName());
+			msgDto.setMessage(fb.getFeedbackMessage());
+			feedBackDtoList.add(msgDto);
+		}
+		return feedBackDtoList;
+	}
+	
+	@PostMapping("/editFeedBack")
+	String editFeedBack(MessageDto editDto) {
+		System.out.println("Edit feedack call");
+		System.out.println(editDto.getName());
+		System.out.println(editDto.getEmailId());
+		System.out.println(editDto.getMessage());
+		feedbackDao.editFeedback(editDto);
+		
+		return "FeedBack submitted";
+	}
+	
+	
 	
 	
 

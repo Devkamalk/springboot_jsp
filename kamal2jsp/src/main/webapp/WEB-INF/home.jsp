@@ -11,6 +11,11 @@
 <link type="text/css" rel="Stylesheet" href="javascript/jqwidgets/styles/jqx.orange.css" />
 <script type="text/javascript" src="javascript/jqwidgets/jqxcore.js"></script>
 <script type="text/javascript" src="javascript/jqwidgets/jqxribbon.js"></script>
+<style>
+table, th, td, button {
+  border:1px solid black;
+}
+</style>
 </head>
 <body>
     <div id="jqxRibbon">
@@ -56,6 +61,20 @@
                 <textarea id = "textArea" rows="10" cols="100"></textarea>
                 <br>
                 <button type="button" onclick="newFeedBack()" > Submit </button>
+                <br>
+                <br>
+                <h2>Recent feedbacks</h2>
+                <table style="width:50%" id="tableId">
+                <tr>
+                <th>Name</th>
+                <th>Feedback </th>
+                <th>Edit Feedback </th>
+                </tr>
+                <!-- <tr>
+                <td>kamal</td>
+                <td>Feedback 1</td>
+                </tr> -->
+                </table>
                 </div>
             <div>
                <b>This is our contact us page:</b><br>
