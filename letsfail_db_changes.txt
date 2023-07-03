@@ -1,0 +1,14 @@
+create schema `letsfail`;
+
+create user if not exists adminkamal identified by 'password';
+select user from mysql.user; 
+GRANT ALL PRIVILEGES ON * . * TO adminkamal;
+
+CREATE TABLE `feedback` (
+  `feedback_id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `emailid` varchar(90) DEFAULT NULL,
+  `feedback_msg` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`feedback_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+ 
